@@ -39,6 +39,8 @@
 
 This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It creates a Launch Template, Auto Scaling Group (ASG), CloudWatch-based scaling policies, and optionally integrates with Security Groups and ALB Target Groups. The module is reusable across multiple applications and environments.
 
+---
+
 ## 2. Scope
 
 - Create Launch Template
@@ -47,6 +49,8 @@ This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It 
 - Support existing AWS resources using data sources
 - Optionally attach ASG to ALB Target Groups
 - Export outputs for reuse
+
+---
 
 ## 3. Terraform Resources Used
 
@@ -59,6 +63,8 @@ This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It 
 | aws_security_group | Creates Security Group (optional) |
 | aws_lb_target_group_attachment | Attaches instances to Target Group |
 | aws_iam_instance_profile | Associates IAM role with EC2 |
+
+---
 
 ## 4. Terraform Data Sources Used
 
@@ -74,13 +80,19 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 | data.aws_ami | Existing AMI |
 | data.aws_key_pair | Existing Key Pair |
 
+---
+
 ## 5. Module Structure
 
 > Add module structure diagram here.
 
+---
+
 # 6. Resource Interdependency Flow
 
 > Add resource flow diagram here.
+
+---
 
 ## 7. File Description
 
@@ -95,6 +107,8 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 | terraform.tfvars | Environment-specific values |
 | README.md | Module documentation |
 | examples/basic | Example usage |
+
+---
 
 ## 8. Input Variables
 
@@ -122,6 +136,8 @@ The following are the primary input variables required to configure the Auto-Sca
 
 Choose the instance type based on your application's CPU and memory requirements. Lightweight services can use smaller instances, while Java or high-traffic applications may require larger instance types.
 
+---
+
 ## 10. Security Group Design
 
 The module supports two approaches:
@@ -131,6 +147,8 @@ The module supports two approaches:
 
 Ingress and egress rules are configurable using input variables.
 
+---
+
 ## 11. Security Group Best Practices
 
 - Follow least-privilege access.
@@ -138,65 +156,57 @@ Ingress and egress rules are configurable using input variables.
 - Allow application traffic only through the ALB Security Group.
 - Avoid unnecessary public access.
 
+---
+
 ## 12. Scaling Policy Design
 
-Auto Scaling is based on CloudWatch CPU utilization metrics. The module automatically scales instances up or down based on CPU thresholds to maintain availability and optimize resource usage.
+This module uses Amazon CloudWatch metrics to automatically adjust the number of EC2 instances in the Auto Scaling Group based on CPU utilization. It helps maintain application availability while optimizing resource usage and cost.
 
-### 13.1 Scale Out Policy
+### 12.1 Scale Out Policy
 
-- Condition: CPU Utilization > 70%
-- Action: Add 1 EC2 instance
-- Cooldown: 300 seconds
+| Parameter | Value |
+|-----------|-------|
+| **Condition** | CPU Utilization > 70% |
+| **Action** | Add 1 EC2 instance |
+| **Cooldown** | 300 seconds |
 
-### 13.2 Scale In Policy
+### 12.2 Scale In Policy
 
-- Condition: CPU Utilization < 30%
-- Action: Remove 1 EC2 instance
-- Cooldown: 300 seconds
+| Parameter | Value |
+|-----------|-------|
+| **Condition** | CPU Utilization < 30% |
+| **Action** | Remove 1 EC2 instance |
+| **Cooldown** | 300 seconds |
 
-### 13.3 Scaling Policy Summary
+---
 
-| Policy | Condition | Action |
-|--------|-----------|--------|
-| Scale Out | CPU > 70% | Add 1 instance |
-| Scale In | CPU < 30% | Remove 1 instance |
-| Cooldown | 300 seconds | Prevent rapid scaling |
-
-### 13.4 Extensible Scaling Conditions
-
-The module can be extended to support memory utilization, request count, network traffic, and custom application metrics.
-
-## 14. Assumptions
-
-- Existing VPC and subnets are available.
-- IAM Instance Profile already exists.
-- AMI is provided or fetched using data sources.
-- Application deployment is managed separately.
-
-## 15. Limitations
-
-- Lifecycle Hooks are not supported.
-- Spot Instances are not included.
-- Memory-based scaling requires custom CloudWatch metrics.
-
-## 16. Future Enhancements
-
-Future improvements may include:
-
-- Scheduled Scaling
-- Spot Instances
-- Warm Pools
-- Instance Refresh
-- Multi-Metric Scaling
 
 ## 17. Best Practices Followed
 
-- Reusable module design
-- Variable-driven configuration
-- Support for existing AWS resources
-- Least-privilege security
-- Standard resource tagging
-- ALB integration support
+| Best Practice | Description |
+|--------------|-------------|
+| **Reusable Module Design** | Designed as a reusable module that can be deployed across multiple applications and environments. |
+| **Variable-Driven Configuration** | Uses input variables instead of hardcoded values for better flexibility and maintainability. |
+| **Support for Existing AWS Resources** | Reuses existing infrastructure through Terraform data sources wherever possible. |
+| **Least-Privilege Security** | Applies the principle of least privilege by allowing only the required network access. |
+| **Standard Resource Tagging** | Uses consistent resource tags for better governance, cost tracking, and resource management. |
+| **ALB Integration Support** | Supports integration with Application Load Balancer Target Groups for traffic distribution and health checks. |
+
+---
+
+## 18. References
+
+| Reference | Description |
+|-----------|-------------|
+| **Terraform Documentation** | https://developer.hashicorp.com/terraform/docs |
+| **Terraform AWS Provider** | https://registry.terraform.io/providers/hashicorp/aws/latest/docs |
+| **Amazon EC2 Auto Scaling** | https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html |
+| **Amazon EC2 Launch Templates** | https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html |
+| **Amazon CloudWatch Documentation** | https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ |
+| **AWS Security Groups** | https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html |
+| **AWS Application Load Balancer** | https://docs.aws.amazon.com/elasticloadbalancing/latest/application/ |
+
+---
 
 ## 18. Contact Information
 
