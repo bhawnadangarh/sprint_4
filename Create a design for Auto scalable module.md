@@ -10,11 +10,36 @@
 | -------------- | ---------- | ------- | --------------- | -------------- | --------------------------------- | ----------- | -------------- |
 | Bhawna Dangarh | 2026-07-17 | 1.0     | Bhawna Dangarh  | 2026-07-18    | Sharvari Khamkar / Tina Bhatnagar | Aman Raj    | Abhishek Dubey |
 
-# 1. Objective
+# Table of Contents
+
+- [Document Details](#document-details)
+- [1. Objective](#1-objective)
+- [2. Scope](#2-scope)
+- [3. Terraform Resources Used](#3-terraform-resources-used)
+- [4. Terraform Data Sources Used](#4-terraform-data-sources-used)
+- [5. Module Structure](#5-module-structure)
+- [6. Resource Interdependency Flow](#6-resource-interdependency-flow)
+- [7. File Description](#7-file-description)
+- [8. Input Variables](#8-input-variables)
+- [9. Instance Design](#9-instance-design)
+- [10. Security Group Design](#10-security-group-design)
+- [11. Security Group Best Practices](#11-security-group-best-practices)
+- [12. Scaling Policy Design](#12-scaling-policy-design)
+  - [13.1 Scale Out Policy](#131-scale-out-policy)
+  - [13.2 Scale In Policy](#132-scale-in-policy)
+  - [13.3 Scaling Policy Summary](#133-scaling-policy-summary)
+  - [13.4 Extensible Scaling Conditions](#134-extensible-scaling-conditions)
+- [14. Assumptions](#14-assumptions)
+- [15. Limitations](#15-limitations)
+- [16. Future Enhancements](#16-future-enhancements)
+- [17. Best Practices Followed](#17-best-practices-followed)
+- [18. Contact Information](#18-contact-information)
+
+## 1. Objective
 
 This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It creates a Launch Template, Auto Scaling Group (ASG), CloudWatch-based scaling policies, and optionally integrates with Security Groups and ALB Target Groups. The module is reusable across multiple applications and environments.
 
-# 2. Scope
+## 2. Scope
 
 - Create Launch Template
 - Create Auto Scaling Group
@@ -23,7 +48,7 @@ This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It 
 - Optionally attach ASG to ALB Target Groups
 - Export outputs for reuse
 
-# 3. Terraform Resources Used
+## 3. Terraform Resources Used
 
 | Resource | Purpose |
 |----------|---------|
@@ -35,7 +60,7 @@ This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It 
 | aws_lb_target_group_attachment | Attaches instances to Target Group |
 | aws_iam_instance_profile | Associates IAM role with EC2 |
 
-# 4. Terraform Data Sources Used
+## 4. Terraform Data Sources Used
 
 This module uses Terraform data sources to retrieve existing AWS resources such as VPCs, subnets, security groups, IAM instance profiles, AMIs, target groups, and key pairs instead of creating them again.
 
@@ -49,7 +74,7 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 | data.aws_ami | Existing AMI |
 | data.aws_key_pair | Existing Key Pair |
 
-# 5. Module Structure
+## 5. Module Structure
 
 > Add module structure diagram here.
 
@@ -57,7 +82,7 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 
 > Add resource flow diagram here.
 
-# 7. File Description
+## 7. File Description
 
 | File | Purpose |
 |------|---------|
@@ -71,7 +96,7 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 | README.md | Module documentation |
 | examples/basic | Example usage |
 
-# 8. Input Variables
+## 8. Input Variables
 
 The following are the primary input variables required to configure the Auto-Scalable Compute Infrastructure module.
 
@@ -93,11 +118,11 @@ The following are the primary input variables required to configure the Auto-Sca
 | `scale_down_cpu_threshold` | `number` | CPU utilization threshold to trigger Scale In |
 | `tags` | `map(string)` | Additional tags applied to AWS resources |
 
-# 9. Instance Design
+## 9. Instance Design
 
 Choose the instance type based on your application's CPU and memory requirements. Lightweight services can use smaller instances, while Java or high-traffic applications may require larger instance types.
 
-# 10. Security Group Design
+## 10. Security Group Design
 
 The module supports two approaches:
 
@@ -106,30 +131,30 @@ The module supports two approaches:
 
 Ingress and egress rules are configurable using input variables.
 
-# 11. Security Group Best Practices
+## 11. Security Group Best Practices
 
 - Follow least-privilege access.
 - Restrict SSH access to trusted IPs.
 - Allow application traffic only through the ALB Security Group.
 - Avoid unnecessary public access.
 
-# 12. Scaling Policy Design
+## 12. Scaling Policy Design
 
 Auto Scaling is based on CloudWatch CPU utilization metrics. The module automatically scales instances up or down based on CPU thresholds to maintain availability and optimize resource usage.
 
-# 13.1 Scale Out Policy
+### 13.1 Scale Out Policy
 
 - Condition: CPU Utilization > 70%
 - Action: Add 1 EC2 instance
 - Cooldown: 300 seconds
 
-# 13.2 Scale In Policy
+### 13.2 Scale In Policy
 
 - Condition: CPU Utilization < 30%
 - Action: Remove 1 EC2 instance
 - Cooldown: 300 seconds
 
-# 13.3 Scaling Policy Summary
+### 13.3 Scaling Policy Summary
 
 | Policy | Condition | Action |
 |--------|-----------|--------|
@@ -137,24 +162,24 @@ Auto Scaling is based on CloudWatch CPU utilization metrics. The module automati
 | Scale In | CPU < 30% | Remove 1 instance |
 | Cooldown | 300 seconds | Prevent rapid scaling |
 
-# 13.4 Extensible Scaling Conditions
+### 13.4 Extensible Scaling Conditions
 
 The module can be extended to support memory utilization, request count, network traffic, and custom application metrics.
 
-# 14. Assumptions
+## 14. Assumptions
 
 - Existing VPC and subnets are available.
 - IAM Instance Profile already exists.
 - AMI is provided or fetched using data sources.
 - Application deployment is managed separately.
 
-# 15. Limitations
+## 15. Limitations
 
 - Lifecycle Hooks are not supported.
 - Spot Instances are not included.
 - Memory-based scaling requires custom CloudWatch metrics.
 
-# 16. Future Enhancements
+## 16. Future Enhancements
 
 Future improvements may include:
 
@@ -164,7 +189,7 @@ Future improvements may include:
 - Instance Refresh
 - Multi-Metric Scaling
 
-# 17. Best Practices Followed
+## 17. Best Practices Followed
 
 - Reusable module design
 - Variable-driven configuration
@@ -173,7 +198,7 @@ Future improvements may include:
 - Standard resource tagging
 - ALB integration support
 
-# 18. Contact Information
+## 18. Contact Information
 
 | Name | Email |
 |------|-------|
