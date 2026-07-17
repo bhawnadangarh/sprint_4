@@ -12,28 +12,25 @@
 
 # Table of Contents
 
-- [Document Details](#document-details)
-- [1. Objective](#1-objective)
-- [2. Scope](#2-scope)
-- [3. Terraform Resources Used](#3-terraform-resources-used)
-- [4. Terraform Data Sources Used](#4-terraform-data-sources-used)
-- [5. Module Structure](#5-module-structure)
-- [6. Resource Interdependency Flow](#6-resource-interdependency-flow)
-- [7. File Description](#7-file-description)
-- [8. Input Variables](#8-input-variables)
-- [9. Instance Design](#9-instance-design)
-- [10. Security Group Design](#10-security-group-design)
-- [11. Security Group Best Practices](#11-security-group-best-practices)
-- [12. Scaling Policy Design](#12-scaling-policy-design)
-  - [13.1 Scale Out Policy](#131-scale-out-policy)
-  - [13.2 Scale In Policy](#132-scale-in-policy)
-  - [13.3 Scaling Policy Summary](#133-scaling-policy-summary)
-  - [13.4 Extensible Scaling Conditions](#134-extensible-scaling-conditions)
-- [14. Assumptions](#14-assumptions)
-- [15. Limitations](#15-limitations)
-- [16. Future Enhancements](#16-future-enhancements)
-- [17. Best Practices Followed](#17-best-practices-followed)
-- [18. Contact Information](#18-contact-information)
+[Document Details](#document-details)
+
+1. [Objective](#1-objective)
+2. [Scope](#2-scope)
+3. [Terraform Resources Used](#3-terraform-resources-used)
+4. [Terraform Data Sources Used](#4-terraform-data-sources-used)
+5. [Module Structure](#5-module-structure)
+6. [Resource Interdependency Flow](#6-resource-interdependency-flow)
+7. [File Description](#7-file-description)
+8. [Input Variables](#8-input-variables)
+9. [Instance Design](#9-instance-design)
+10. [Security Group Design](#10-security-group-design)
+11. [Security Group Best Practices](#11-security-group-best-practices)
+12. [Scaling Policy Design](#12-scaling-policy-design)
+    12.1 [Scale Out Policy](#121-scale-out-policy)
+    12.2 [Scale In Policy](#122-scale-in-policy)
+13. [Best Practices Followed](#13-best-practices-followed)
+14. [References](#14-references)
+15. [Contact Information](#15-contact-information)
 
 ## 1. Objective
 
@@ -84,13 +81,15 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 
 ## 5. Module Structure
 
-> Add module structure diagram here.
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/9af62e42-19b9-4bf9-804d-4bdb14015344" />
 
+    
 ---
 
 # 6. Resource Interdependency Flow
 
-> Add resource flow diagram here.
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/a3aa5e2b-2588-4b75-8a76-cc18261565e1" />
+
 
 ---
 
@@ -181,7 +180,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 ---
 
 
-## 17. Best Practices Followed
+## 13. Best Practices Followed
 
 | Best Practice | Description |
 |--------------|-------------|
@@ -194,7 +193,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 
 ---
 
-## 18. References
+## 14. References
 
 | Reference | Description |
 |-----------|-------------|
@@ -208,7 +207,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 
 ---
 
-## 18. Contact Information
+## 15. Contact Information
 
 | Name | Email |
 |------|-------|
