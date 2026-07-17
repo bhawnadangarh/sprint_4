@@ -12,8 +12,6 @@
 
 # Table of Contents
 
-[Document Details](#document-details)
-
 1. [Objective](#1-objective)
 2. [Scope](#2-scope)
 3. [Terraform Resources Used](#3-terraform-resources-used)
@@ -34,7 +32,7 @@
 
 ## 1. Objective
 
-This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It creates a Launch Template, Auto Scaling Group (ASG), CloudWatch-based scaling policies, and optionally integrates with Security Groups and ALB Target Groups. The module is reusable across multiple applications and environments.
+This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It creates a Launch Template, Auto Scaling Group (ASG), CloudWatch-based scaling policies, and integrates with existing Security Groups and ALB Target Groups. The module is designed for reuse across multiple applications and environments.
 
 ---
 
@@ -44,7 +42,7 @@ This Terraform module provisions a reusable AWS Auto Scaling infrastructure. It 
 - Create Auto Scaling Group
 - Configure CPU-based auto scaling
 - Support existing AWS resources using data sources
-- Optionally attach ASG to ALB Target Groups
+- Attach ASG to ALB Target Groups
 - Export outputs for reuse
 
 ---
