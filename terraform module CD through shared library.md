@@ -139,28 +139,14 @@ pipeline {
 
 # 8. How the Library Is Structured
 
-The Terraform CD Shared Library is divided into different folders to keep the code organized.
+The Terraform CI Shared Library is organized into different directories to keep the code clean and easy to maintain. Each directory has a specific purpose, such as storing reusable Groovy classes, global pipeline functions, and supporting resource files.
 
 - **src/** contains reusable Groovy classes.
 - **vars/** contains global pipeline functions.
 - **resources/** stores supporting files used by the library.
 
-```text
-terraform-shared-lib/
-│
-├── src/
-│   └── org/
-│       └── terraform/
-│           ├── TerraformApply.groovy
-│           └── TerraformDestroy.groovy
-│
-├── vars/
-│   └── terraform.groovy
-│
-├── resources/
-│
-└── README.md
-```
+<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/61abfe45-1a3c-406e-8527-92bd241c80a3" />
+
 
 ---
 
