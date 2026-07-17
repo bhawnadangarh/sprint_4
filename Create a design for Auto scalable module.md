@@ -73,35 +73,25 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 
 # 8. Input Variables
 
+The following are the primary input variables required to configure the Auto-Scalable Compute Infrastructure module.
+
 | Variable | Type | Description |
 |----------|------|-------------|
-| name | string | Resource prefix |
-| environment | string | Environment name |
-| application | string | Application name |
-| owner | string | Resource owner |
-| cost_center | string | Cost center tag |
-| vpc_id | string | Existing VPC ID |
-| subnet_ids | list(string) | Subnet IDs |
-| ami_id | string | EC2 AMI ID |
-| instance_type | string | EC2 instance type |
-| key_name | string | SSH Key Pair |
-| iam_instance_profile_name | string | IAM Instance Profile |
-| min_size | number | Minimum instances |
-| max_size | number | Maximum instances |
-| desired_capacity | number | Desired instances |
-| health_check_type | string | EC2 or ELB |
-| create_security_group | bool | Create Security Group |
-| security_group_ids | list(string) | Existing SG IDs |
-| ingress_rules | list(object) | Ingress rules |
-| egress_rules | list(object) | Egress rules |
-| associate_target_groups | bool | Attach Target Groups |
-| target_group_arns | list(string) | Target Group ARNs |
-| user_data | string | Bootstrap script |
-| enable_detailed_monitoring | bool | CloudWatch monitoring |
-| scale_up_cpu_threshold | number | Scale-out threshold |
-| scale_down_cpu_threshold | number | Scale-in threshold |
-| cooldown | number | Scaling cooldown |
-| tags | map(string) | Resource tags |
+| `name` | `string` | Resource name prefix |
+| `environment` | `string` | Deployment environment (e.g., dev, qa, prod) |
+| `vpc_id` | `string` | Existing VPC ID |
+| `subnet_ids` | `list(string)` | Subnet IDs where the Auto Scaling Group will be deployed |
+| `ami_id` | `string` | EC2 AMI ID used by the Launch Template |
+| `instance_type` | `string` | EC2 instance type |
+| `iam_instance_profile_name` | `string` | IAM Instance Profile attached to EC2 instances |
+| `min_size` | `number` | Minimum number of instances in the Auto Scaling Group |
+| `max_size` | `number` | Maximum number of instances in the Auto Scaling Group |
+| `desired_capacity` | `number` | Desired number of running instances |
+| `security_group_ids` | `list(string)` | Security Group IDs associated with EC2 instances |
+| `target_group_arns` | `list(string)` | ALB Target Group ARNs for traffic routing |
+| `scale_up_cpu_threshold` | `number` | CPU utilization threshold to trigger Scale Out |
+| `scale_down_cpu_threshold` | `number` | CPU utilization threshold to trigger Scale In |
+| `tags` | `map(string)` | Additional tags applied to AWS resources |
 
 # 9. Instance Design
 
