@@ -1,11 +1,14 @@
 
 # AWS Auto-Scalable Compute Infrastructure - Terraform Module
 
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/876d2897-8dcd-4265-8134-df2826d364b6" />
+
+
 ## Document Details
 
-| Author | Created | Version | Last Updated By | Last Edited On |
-|--------|---------|---------|-----------------|----------------|
-| Bhawna Dangarh | 2026-05-26 | 1.0 | Bhawna Dangarh | 2026-05-27 |
+| Author         | Created    | Version | Last Updated By | Last Edited On | L0 Reviewer                       | L1 Reviewer | L2 Reviewer    |
+| -------------- | ---------- | ------- | --------------- | -------------- | --------------------------------- | ----------- | -------------- |
+| Bhawna Dangarh | 2026-07-17 | 1.0     | Bhawna Dangarh  | 2026-07-18    | Sharvari Khamkar / Tina Bhatnagar | Aman Raj    | Abhishek Dubey |
 
 # 1. Objective
 
