@@ -12,6 +12,8 @@
 
 # Table of Contents
 
+[Document Details](#document-details)
+
 1. [Objective](#1-objective)
 2. [Scope](#2-scope)
 3. [Terraform Resources Used](#3-terraform-resources-used)
@@ -24,8 +26,8 @@
 10. [Security Group Design](#10-security-group-design)
 11. [Security Group Best Practices](#11-security-group-best-practices)
 12. [Scaling Policy Design](#12-scaling-policy-design)
-    12.1 [Scale Out Policy](#121-scale-out-policy)
-    12.2 [Scale In Policy](#122-scale-in-policy)
+    1. [Scale Out Policy](#121-scale-out-policy)
+    2. [Scale In Policy](#122-scale-in-policy)
 13. [Best Practices Followed](#13-best-practices-followed)
 14. [References](#14-references)
 15. [Contact Information](#15-contact-information)
