@@ -1,5 +1,8 @@
 # Terraform Module CD — Shared Library (Documentation)
 
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/b942a03d-083b-4fe1-863a-007898203f70" />
+
+
 ## Document Details
 
 | Author | Created | Version | Last Updated By | Last Edited On | L0 Reviewer | L1 Reviewer | L2 Reviewer |
