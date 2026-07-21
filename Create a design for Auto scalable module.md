@@ -1,7 +1,7 @@
 
 # AWS Auto-Scalable Compute Infrastructure - Terraform Module
 
-<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/876d2897-8dcd-4265-8134-df2826d364b6" />
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/329d89c8-f535-4014-bd9e-90794667c017" />
 
 
 ## Document Details
@@ -12,25 +12,22 @@
 
 # Table of Contents
 
-[Document Details](#document-details)
+1. [Objective](#1-objective)  
+2. [Scope](#2-scope)  
+3. [Terraform Resources Used](#3-terraform-resources-used)  
+4. [Terraform Data Sources Used](#4-terraform-data-sources-used)  
+5. [Module Structure](#5-module-structure)  
+6. [File Description](#6-file-description)  
+7. [Input Variables](#7-input-variables)  
+8. [Instance Design](#8-instance-design)  
+9. [Security Group Design](#9-security-group-design)  
+10. [Scaling Policy Design](#10-scaling-policy-design)  
+   10.1 [Scale Out Policy](#101-scale-out-policy)  
+   10.2 [Scale In Policy](#102-scale-in-policy)  
+11. [Best Practices Followed](#11-best-practices-followed)  
+12. [References](#12-references)  
+13. [Contact Information](#13-contact-information)
 
-1. [Objective](#1-objective)
-2. [Scope](#2-scope)
-3. [Terraform Resources Used](#3-terraform-resources-used)
-4. [Terraform Data Sources Used](#4-terraform-data-sources-used)
-5. [Module Structure](#5-module-structure)
-6. [Resource Interdependency Flow](#6-resource-interdependency-flow)
-7. [File Description](#7-file-description)
-8. [Input Variables](#8-input-variables)
-9. [Instance Design](#9-instance-design)
-10. [Security Group Design](#10-security-group-design)
-11. [Security Group Best Practices](#11-security-group-best-practices)
-12. [Scaling Policy Design](#12-scaling-policy-design)
-    1. [Scale Out Policy](#121-scale-out-policy)
-    2. [Scale In Policy](#122-scale-in-policy)
-13. [Best Practices Followed](#13-best-practices-followed)
-14. [References](#14-references)
-15. [Contact Information](#15-contact-information)
 
 ## 1. Objective
 
@@ -81,19 +78,12 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 
 ## 5. Module Structure
 
-<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/9af62e42-19b9-4bf9-804d-4bdb14015344" />
+<img width="1200" height="326" alt="image" src="https://github.com/user-attachments/assets/39cb1e6d-bb24-4a29-84b5-cdb3dd776109" />
 
     
 ---
 
-# 6. Resource Interdependency Flow
-
-<img width="500" height="400" alt="image" src="https://github.com/user-attachments/assets/a3aa5e2b-2588-4b75-8a76-cc18261565e1" />
-
-
----
-
-## 7. File Description
+## 6. File Description
 
 | File | Purpose |
 |------|---------|
@@ -109,7 +99,7 @@ This module uses Terraform data sources to retrieve existing AWS resources such 
 
 ---
 
-## 8. Input Variables
+## 7. Input Variables
 
 The following are the primary input variables required to configure the Auto-Scalable Compute Infrastructure module.
 
@@ -131,37 +121,28 @@ The following are the primary input variables required to configure the Auto-Sca
 | `scale_down_cpu_threshold` | `number` | CPU utilization threshold to trigger Scale In |
 | `tags` | `map(string)` | Additional tags applied to AWS resources |
 
-## 9. Instance Design
+## 8. Instance Design
 
 Choose the instance type based on your application's CPU and memory requirements. Lightweight services can use smaller instances, while Java or high-traffic applications may require larger instance types.
 
 ---
 
-## 10. Security Group Design
+## 9. Security Group Design
+
+The module provides flexible Security Group management to support different deployment scenarios. Security Group rules are parameterized using input variables, allowing network access to be configured without modifying the module code. This approach improves reusability, maintainability, and security across different environments.
 
 The module supports two approaches:
 
-- Use an existing Security Group.
-- Create a new Security Group through the module.
-
-Ingress and egress rules are configurable using input variables.
+- **Use an existing Security Group** – Attach one or more pre-created Security Groups by providing their IDs.
+- **Create a new Security Group** – Create and manage a dedicated Security Group through the module with customizable ingress and egress rules.
 
 ---
 
-## 11. Security Group Best Practices
-
-- Follow least-privilege access.
-- Restrict SSH access to trusted IPs.
-- Allow application traffic only through the ALB Security Group.
-- Avoid unnecessary public access.
-
----
-
-## 12. Scaling Policy Design
+## 10. Scaling Policy Design
 
 This module uses Amazon CloudWatch metrics to automatically adjust the number of EC2 instances in the Auto Scaling Group based on CPU utilization. It helps maintain application availability while optimizing resource usage and cost.
 
-### 12.1 Scale Out Policy
+### 10.1 Scale Out Policy
 
 | Parameter | Value |
 |-----------|-------|
@@ -169,7 +150,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 | **Action** | Add 1 EC2 instance |
 | **Cooldown** | 300 seconds |
 
-### 12.2 Scale In Policy
+### 10.2 Scale In Policy
 
 | Parameter | Value |
 |-----------|-------|
@@ -180,7 +161,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 ---
 
 
-## 13. Best Practices Followed
+## 11. Best Practices Followed
 
 | Best Practice | Description |
 |--------------|-------------|
@@ -193,7 +174,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 
 ---
 
-## 14. References
+## 12. References
 
 | Reference | Description |
 |-----------|-------------|
@@ -207,7 +188,7 @@ This module uses Amazon CloudWatch metrics to automatically adjust the number of
 
 ---
 
-## 15. Contact Information
+## 13. Contact Information
 
 | Name | Email |
 |------|-------|
